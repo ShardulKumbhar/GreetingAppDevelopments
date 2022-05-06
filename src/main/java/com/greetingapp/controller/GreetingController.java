@@ -20,7 +20,7 @@ public class GreetingController {
     /**
      * Getmapping URL to post key as firstName=Sharul and lastName-Shardul
      * To add the given parameter lo the local repository and save the data into the h2 Database.
-     * http://localhost:8080/home?firstName=Shardul&lastName=Kumbhar
+     * ttp://localhost:8080/home?firstName=Shardul&lastName=Kumbharh
      */
     @GetMapping("/home")
     public Greeting greeting(@RequestParam(value = "firstName", defaultValue = "first") String firstName,
@@ -63,5 +63,15 @@ public class GreetingController {
     @PutMapping("/edit")
     public Greeting updateGreeting(@RequestBody Greeting greeting) {
         return greetingService.updateGreeting(greeting);
+    }
+    /**
+     * Method to delete the user from the repository.
+     *
+     * @param id
+     * URL - http://localhost:8080/delete
+     */
+    @DeleteMapping("/delete")
+    public void deleteGreeting(@RequestParam(value = "id") long id) {
+        greetingService.deleteGreeting(id);
     }
 }

@@ -63,4 +63,13 @@ public class GreetingServiceimpl implements GreetingService {
             return new Greeting(-1, " Greeting not found!");
     }
 
+    /**
+     * Method to delete the user from the repository
+     * @param id
+     */
+    @Override
+    public void deleteGreeting(long id) {
+        greetingRepository.deleteById(id);
+    }
+
 }
