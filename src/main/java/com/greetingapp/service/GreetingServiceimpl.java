@@ -49,4 +49,18 @@ public class GreetingServiceimpl implements GreetingService {
     public List<Greeting> getAll() {
         return greetingRepository.findAll();
     }
+
+    /**
+     * Method to update/edit the greetings.
+     *
+     * @return -  updated greeting
+     */
+    @Override
+    public Greeting updateGreeting(Greeting greeting) {
+        if (greetingRepository.findById(greeting.getId()).isPresent())
+            return greetingRepository.save(greeting);
+        else
+            return new Greeting(-1, " Greeting not found!");
+    }
+
 }
