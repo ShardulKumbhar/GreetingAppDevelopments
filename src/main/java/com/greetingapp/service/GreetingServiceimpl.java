@@ -6,9 +6,11 @@ import com.greetingapp.repository.GreetingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+
 @Service
-public class GreetingServiceimpl implements GreetingService{
+public class GreetingServiceimpl implements GreetingService {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
@@ -19,7 +21,7 @@ public class GreetingServiceimpl implements GreetingService{
     private GreetingRepository greetingRepository;
 
     /**
-    Taking greeting message in form of User entity
+     * Taking greeting message in form of User entity
      */
     @Override
     public Greeting addGreeting(User user) {
@@ -29,11 +31,22 @@ public class GreetingServiceimpl implements GreetingService{
 
     /**
      * Creating and Uniq ID to Store message
+     *
      * @param id
      * @return
      */
     @Override
     public Greeting getGreetingById(long id) {
         return greetingRepository.findById(id).get();
+    }
+
+    /**
+     * Method to get the list of repository.
+     *
+     * @return - List all users in the repository.
+     */
+    @Override
+    public List<Greeting> getAll() {
+        return greetingRepository.findAll();
     }
 }
