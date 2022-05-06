@@ -16,15 +16,28 @@ public class GreetingController {
     private GreetingService greetingService;
 
     /*
-    Getmapping URL to post key as name=Sharul
-    or default value = World
-    http://localhost:8080/home
-    Postman = key-name value -Shardul
+     Getmapping URL to post key as firstName=Sharul and lastName-Shardul
+     To add the given parameter lo the local repository and save the data into the h2 Database.
+     http://localhost:8080/home?firstName=Shardul&lastName=Kumbhar
      */
     @GetMapping("/home")
-    public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+    public Greeting greeting(@RequestParam(value = "firstName", defaultValue = "first") String firstName,
+                             @RequestParam(value = "lastName", defaultValue = "last") String lastName) {
         User user = new User();
-        user.setFirstName(name);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
         return greetingService.addGreeting(user);
+    }
+
+    /**
+     * Method to find the Greeting Message using there id as a parameter.
+     *
+     * @param id
+     * @return - Find the greeting message using ID.
+     * URL - http://localhost:8080/find?id=2
+     */
+    @GetMapping("/find")
+    public Greeting getGreetingById(@RequestParam(value = "id") long id) {
+        return greetingService.getGreetingById(id);
     }
 }
